@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unsaid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    textarea, select, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      font-size: 16px;
+    }
+    .message {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Write what you never said</h2>
+
+  <textarea id="text" placeholder="Write your message..."></textarea>
+
+  <select id="who">
+    <option>Younger Self</option>
+    <option>Present Self</option>
+    <option>Future Self</option>
+  </select>
+
+  <button onclick="addMessage()">Submit</button>
+
+  <div id="messages"></div>
+
+  <script>
+    let messages = [];
+
+    function addMessage() {
+      const text = document.getElementById("text").value;
+      const who = document.getElementById("who").value;
+
+      if (!text.trim()) return;
+
+      messages.unshift({ text, who });
+      document.getElementById("text").value = "";
+      showMessages();
+    }
+
+    function showMessages() {
+      const box = document.getElementById("messages");
+      box.innerHTML = "";
+
+      messages.forEach(m => {
+        box.innerHTML += `
+          <div class="message">
+            <strong>${m.who}</strong>
+            <p>${m.text}</p>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>
